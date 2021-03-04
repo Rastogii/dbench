@@ -6,7 +6,8 @@ provisioner: kubernetes.io/azure-file
 parameters:
   skuName: Standard_LRS
   location: eastus
-  storageAccount: azure_storage_account_name
+  storageAccount: demo-account
+  secretName: demo-secret
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
