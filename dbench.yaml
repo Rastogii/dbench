@@ -1,16 +1,21 @@
-kind: PersistentVolumeClaim
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: azurefile
+provisioner: kubernetes.io/azure-file
+parameters:
+  skuName: Standard_LRS
+  location: eastus
+  storageAccount: azure_storage_account_name
+---
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: dbench-pv-claim
 spec:
-  storageClassName: ssd
-  # storageClassName: gp2
-  # storageClassName: local-storage
-  # storageClassName: ibmc-block-bronze
-  # storageClassName: ibmc-block-silver
-  # storageClassName: ibmc-block-gold
   accessModes:
     - ReadWriteOnce
+  storageClassName: my-azurefile
   resources:
     requests:
       storage: 1000Gi
